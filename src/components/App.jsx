@@ -171,14 +171,36 @@ function App() {
         <p className="title">Explore information about countries, capitals, and flags. Add new countries and filter through the list.</p>
       </header>
       <main className="main">
-        <section>
+        <div className="forms">
+        <section className="section-form">
           <p>Filters</p>
           <form className="form-filters">
             <label htmlFor="filter-country">By Country</label>
             <input type="text" name="filter-country" id="filter-country" className="input" placeholder="Belize"/>
             <label htmlFor="filter-continent">By Continent</label>
+            <select name="filter-continent" id="filter-continent" className="input">
+              <option value="">All</option>
+              <option value="Europe">Europe</option>
+              <option value="Asia">Asia</option>
+              <option value="Africa">Africa</option>
+              <option value="Oceania">Oceania</option>
+              <option value="Americas">Americas</option>
+            </select>
           </form>
         </section>
+        <section className="section-form">
+          <p>Add Country</p>
+          <form className="form-add">
+            <input type="text" name="country" id="country" placeholder="Country Name" />
+            <input type="text" name="capital" id="capital" placeholder="Capital" />
+            <input type="text" name="flag" id="flag" placeholder="Flag" />
+            <input type="text" name="continent" id="continent" placeholder="Continent" />
+            <button type="submit" className="button-add">Add Country</button>
+
+          </form>
+
+        </section>
+        </div>
         <section>
           <ul className="country-list">
             {countries.map((country, index) => (

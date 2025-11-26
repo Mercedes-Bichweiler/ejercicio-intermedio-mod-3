@@ -26,6 +26,13 @@ body {
 .main {
   padding: 2rem;
 }
+.forms {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
 .form-filters {
   display: flex;
   flex-direction: column;
@@ -39,4 +46,23 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
   margin-top: 2rem;
+}
+.form-add {
+  gap: 4rem;
+} 
+
+.button-add {
+  padding: 0.5rem;
+  background-color: darkcyan;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 1rem;
+}
+
+@media (max-width: 600px) {
+  .forms {
+    flex-direction: column;
+  }
 }
