@@ -1,69 +1,83 @@
-import Header from "./layout/Header";
 import "../styles/App.scss";
 import { useState } from "react";
-import CountryList from "./CountryList";
+import CountryList from "./layout/CountryList";
+import Header from "./layout/Header";
 
 const inicialCountries = [
   {
-    "name": { "common": "Bhutan", "official": "Kingdom of Bhutan", "nativeName": { "dzo": { "official": "འབྲུག་རྒྱལ་ཁབ་", "common": "འབྲུག་ཡུལ་" } } },
+    "name": { "common": "Bhutan" },
     "capital": [ "Thimphu" ],
-    "flag": "🇧🇹"
+    "flag": "🇧🇹",
+    "continent": "Asia"
   },
   {
-    "name": { "common": "Italy", "official": "Italian Republic", "nativeName": { "ita": { "official": "Repubblica italiana", "common": "Italia" } } },
+    "name": { "common": "Italy" },
     "capital": [ "Rome" ],
-    "flag": "🇮🇹"
+    "flag": "🇮🇹",
+    "continent": "Europe"
   },
   {
-    "name": { "common": "Tuvalu", "official": "Tuvalu", "nativeName": { "eng": { "official": "Tuvalu", "common": "Tuvalu" }, "tvl": { "official": "Tuvalu", "common": "Tuvalu" } } },
+    "name": { "common": "Tuvalu" },
     "capital": [ "Funafuti" ],
-    "flag": "🇹🇻"
+    "flag": "🇹🇻",
+    "continent": "Oceania"
   },
   {
-    "name": { "common": "Anguilla", "official": "Anguilla", "nativeName": { "eng": { "official": "Anguilla", "common": "Anguilla" } } },
+    "name": { "common": "Anguilla" },
     "capital": [ "The Valley" ],
-    "flag": "🇦🇮"
+    "flag": "🇦🇮",
+    "continent": "Americas"
   },
   {
-    "name": { "common": "Australia", "official": "Commonwealth of Australia", "nativeName": { "eng": { "official": "Commonwealth of Australia", "common": "Australia" } } },
+    "name": { "common": "Australia" },
     "capital": [ "Canberra" ],
-    "flag": "🇦🇺"
+    "flag": "🇦🇺",
+    "continent": "Oceania"
   },
   {
-    "name": { "common": "Belize", "official": "Belize", "nativeName": { "bjz": { "official": "Belize", "common": "Belize" }, "eng": { "official": "Belize", "common": "Belize" }, "spa": { "official": "Belice", "common": "Belice" } } },
+    "name": { "common": "Belize" },
     "capital": [ "Belmopan" ],
-    "flag": "🇧🇿"
+    "flag": "🇧🇿",
+    "continent": "Americas"
   },
   {
-    "name": { "common": "Belarus", "official": "Republic of Belarus", "nativeName": { "bel": { "official": "Рэспубліка Беларусь", "common": "Белару́сь" }, "rus": { "official": "Республика Беларусь", "common": "Беларусь" } } },
+    "name": { "common": "Belarus" },
     "capital": [ "Minsk" ],
-    "flag": "🇧🇾"
+    "flag": "🇧🇾",
+    "continent": "Europe"
   },
   {
-    "name": { "common": "Mauritius", "official": "Republic of Mauritius", "nativeName": { "eng": { "official": "Republic of Mauritius", "common": "Mauritius" }, "fra": { "official": "République de Maurice", "common": "Maurice" }, "mfe": { "official": "Republik Moris", "common": "Moris" } } },
+    "name": { "common": "Mauritius" },
     "capital": [ "Port Louis" ],
-    "flag": "🇲🇺"
+    "flag": "🇲🇺",
+    "continent": "Africa"
   }
 ];
 
 function App() {
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-  }
-
   const [countries, setCountries] = useState(inicialCountries);
   const [filterByName, setFilterByName] = useState("");
+  const [filterByContinent, setFilterByContinent] = useState("");
+
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+  };
 
   const handleFilterByName = (ev) => {
     setFilterByName(ev.target.value);
-  }
+  };
 
-  const filteredCountrys = countries.filter((eachCountry) =>
-    eachCountry.name.common.toLowerCase().includes(filterByName.toLowerCase())
-  );
+  const handleFilterByContinent = (ev) => {
+    setFilterByContinent(ev.target.value);
+  };
 
-  console.log(filterByName);
-  console.log(filteredCountrys);
+  const filteredCountries = countries
+    .filter((c) =>
+      c.name.common.toLowerCase().includes(filterByName.toLowerCase())
+    )
+    .filter((c) =>
+      filterByContinent ? c.continent === filterByContinent : true
+    );
 
   return (
     <div>
@@ -84,7 +98,13 @@ function App() {
                 onChange={handleFilterByName}
               />
               <label htmlFor="filter-continent">By Continent</label>
-              <select name="filter-continent" id="filter-continent" className="input">
+              <select
+                name="filter-continent"
+                id="filter-continent"
+                className="input"
+                value={filterByContinent}
+                onChange={handleFilterByContinent}
+              >
                 <option value="">All</option>
                 <option value="Europe">Europe</option>
                 <option value="Asia">Asia</option>
@@ -108,7 +128,7 @@ function App() {
         </div>
 
         <section>
-         <CountryList filteredCountrys={filteredCountrys} />
+          <CountryList filteredCountries={filteredCountries} />
         </section>
       </main>
     </div>
