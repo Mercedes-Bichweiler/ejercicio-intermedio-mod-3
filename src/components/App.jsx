@@ -1,7 +1,8 @@
 import "../styles/App.scss";
 import { useState } from "react";
-import CountryList from "./layout/CountryList";
+import CountryList from "./listing/CountryList";
 import Header from "./layout/Header";
+import CountryFilter from "./listing/CountryFilter";
 
 const inicialCountries = [
   {
@@ -86,33 +87,13 @@ function App() {
         <div className="forms">
           <section className="section-form">
             <p>Filters</p>
-            <form onSubmit={handleSubmit} className="form-filters">
-              <label htmlFor="filter-country">By Country</label>
-              <input
-                type="text"
-                name="filter-country"
-                id="filter-country"
-                className="input"
-                placeholder="Belize"
-                value={filterByName}
-                onChange={handleFilterByName}
-              />
-              <label htmlFor="filter-continent">By Continent</label>
-              <select
-                name="filter-continent"
-                id="filter-continent"
-                className="input"
-                value={filterByContinent}
-                onChange={handleFilterByContinent}
-              >
-                <option value="">All</option>
-                <option value="Europe">Europe</option>
-                <option value="Asia">Asia</option>
-                <option value="Africa">Africa</option>
-                <option value="Oceania">Oceania</option>
-                <option value="Americas">Americas</option>
-              </select>
-            </form>
+            <CountryFilter 
+              filterByName={filterByName}
+              handleFilterByName={handleFilterByName}
+              filterByContinent={filterByContinent}
+              handleFilterByContinent={handleFilterByContinent}
+              handleSubmit={handleSubmit}
+            />
           </section>
 
           <section className="section-form">

@@ -2,8 +2,8 @@ function CountryList({ filteredCountries = [] }) {
   return (
     <ul className="country-list">
       {filteredCountries.length > 0 ? (
-        filteredCountries.map((country, index) => (
-          <li key={index} className="country-item">
+        filteredCountries.map((country) => (
+          <li key={country.name.common} className="country-item">
             <h2 className="country-name">{country.name.common}</h2>
             <p className="country-capital">
               Capital: {country.capital && country.capital[0]}
