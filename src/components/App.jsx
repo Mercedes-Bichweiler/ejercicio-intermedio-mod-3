@@ -1,6 +1,7 @@
-// ...existing code...
+import Header from "./layout/Header";
 import "../styles/App.scss";
 import { useState } from "react";
+import CountryList from "./CountryList";
 
 const inicialCountries = [
   {
@@ -66,10 +67,7 @@ function App() {
 
   return (
     <div>
-      <header className="header">
-        <h1 className="title">Country Info App</h1>
-        <p className="title">Explore information about countries, capitals, and flags. Add new countries and filter through the list.</p>
-      </header>
+      <Header />
       <main className="main">
         <div className="forms">
           <section className="section-form">
@@ -104,26 +102,13 @@ function App() {
               <input type="text" name="capital" id="capital" placeholder="Capital" />
               <input type="text" name="flag" id="flag" placeholder="Flag" />
               <input type="text" name="continent" id="continent" placeholder="Continent" />
-              {/* Evito recarga cambiando el tipo de botón */}
               <button type="button" className="button-add">Add Country</button>
             </form>
           </section>
         </div>
 
         <section>
-          <ul className="country-list">
-            {filteredCountrys.length > 0 ? (
-              filteredCountrys.map((country, index) => (
-                <li key={index} className="country-item">
-                  <h2 className="country-name">{country.name.common}</h2>
-                  <p className="country-capital">Capital: {country.capital && country.capital[0]}</p>
-                  <p className="country-flag">Flag: {country.flag}</p>
-                </li>
-              ))
-            ) : (
-              <li className="country-item">No se han encontrado países</li>
-            )}
-          </ul>
+         <CountryList filteredCountrys={filteredCountrys} />
         </section>
       </main>
     </div>
@@ -131,4 +116,3 @@ function App() {
 }
 
 export default App;
-// ...existing code...
